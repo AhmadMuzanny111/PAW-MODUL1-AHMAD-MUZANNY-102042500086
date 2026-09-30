@@ -297,11 +297,12 @@ body {
 }
 
 .btn-disabled {
-    background: #e8d0d5;
-    color: #9c7880;
-    cursor: not-allowed;
-    box-shadow: none;
-    border: 1px solid var(--border-color);
+    background: #e8d0d5 !important;
+    color: #9c7880 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    border: 1px solid var(--border-color) !important;
+    transform: none !important;
 }
 
 @media (max-width: 640px) {
