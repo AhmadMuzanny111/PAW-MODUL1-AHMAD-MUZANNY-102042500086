@@ -1,115 +1,142 @@
-<?php require_once 'data.php'; ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cia Store</title>
-    <!-- Import Google Fonts (Plus Jakarta Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Link CSS Eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <!-- Navigasi -->
-     <nav class="navbar">
+    <nav class="navbar">
         <a href="#" class="navbar-toko">Cia Store</a>
         <ul class="navbar-top">
             <li><a href="#">Beranda</a></li>
             <li><a href="#produk">Produk</a></li>
             <li><a href="#">Tentang kami</a></li>
         </ul>
-     </nav>
+    </nav>
 
-    <!-- Hero Section -->
-     <header class="hero">
+    <header class="hero">
         <h1>Selamat datang di Cia Store</h1>
         <p>Temukan perangkat dan aksesoris teknologi kualitas tinggi dengan harga terbaik!</p>
-     </header>
+    </header>
 
-    <!-- Konten Utama -->
     <main class="container" id="produk">
-    <!-- Informasi jumlah produk -->
         <div class="produk-header">
             <h2 class="produk-tittle">Daftar Produk</h2>
             <div class="produk-totalproduk">
-                Total produk: <strong><?= $total_produk; ?></strong> 
+                Total produk: <strong>6</strong> 
             </div>
-    </div>
+        </div>
 
-    <!-- Looping PHP buat nampilin card produk -->
-    <div class="produk-grid">
-        <?php foreach ($produk_list as $produk): ?>
-            <?php 
-                // 1. HITUNG LOGIKA DISKON DI SINI (Sebelum HTML dirender)
-                $harga_normal = $produk['harga'];
-                $dapet_diskon = $harga_normal >= 1000000; // Syarat modul: >= Rp 1.000.000
-                $persen_diskon = 10;
-                
-                if ($dapet_diskon) {
-                    $potongan = $harga_normal * ($persen_diskon / 100);
-                    $harga_setelah_diskon = $harga_normal - $potongan;
-                }
-            ?>
-
-    <div class="card">
-        <div class="kategori">
-            <?= htmlspecialchars($produk['kategori']); ?>
-        </div>
-        <h3 class="nama-produk"><?= htmlspecialchars($produk['nama']); ?></h3>
-                
-    <!-- Area Tampilan Harga & Diskon -->
-        <div class="area-harga">
-            <?php if ($dapet_diskon): ?>
-    <!-- Baris Harga Coret & Badge Diskon -->
-        <div class="harga-diskon-wrapper">
-            <span class="harga-normal-coret">Rp <?= number_format($harga_normal, 0, ',', '.'); ?></span>
-            <span class="badge-diskon">Hemat <?= $persen_diskon; ?>%</span>
-        </div>
-    <!-- Harga Akhir Setelah Diskon -->
-        <div class="harga">
-            Rp <?= number_format($harga_setelah_diskon, 0, ',', '.'); ?>
-        </div>
-        <?php else: ?>
-    <!-- Harga Normal Jika Tidak Ada Diskon -->
-        <div class="harga">
-            Rp <?= number_format($harga_normal, 0, ',', '.'); ?>
-        </div>
-            <?php endif; ?>
-        </div>
-                
-    <!-- Informasi Stok & Tombol Beli -->
-        <div class="info-stok">
-                    <div class="stok-row">
-                        <span>Sisa Stok: <strong><?= $produk['stok']; ?></strong></span>
-
-                        <?php
-                        // Percabangan 1: Cek stok
-                        if ($produk['stok'] > 0) {
-                            echo '<span class="badge badge-tersedia">Tersedia</span>';
-                        } else {
-                            echo '<span class="badge badge-tidaktersedia">Habis</span>';
-                        }
-                        ?>
+        <div class="produk-grid">
+            <!-- Produk 1 (Ada Diskon >= 1 Juta) -->
+            <div class="card">
+                <div class="kategori">keyboard mechanical</div>
+                <h3 class="nama-produk">CIA Keyboard Mechanical K75</h3>
+                <div class="area-harga">
+                    <div class="harga-diskon-wrapper">
+                        <span class="harga-normal-coret">Rp 1.500.000</span>
+                        <span class="badge-diskon">Hemat 10%</span>
                     </div>
-
-                    <?php 
-                    // Percabangan 2: Cek tombol beli
-                    if ($produk['stok'] > 0) {
-                        echo '<button class="btn-beli">Beli</button>';
-                    } else {
-                        echo '<button class="btn-beli btn-disabled" disabled>Stok Habis</button>';
-                    }
-                    ?>
+                    <div class="harga">Rp 1.350.000</div>
+                </div>
+                <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong>17</strong></span>
+                        <span class="badge badge-tersedia">Tersedia</span>
+                    </div>
+                    <button class="btn-beli">Beli</button>
                 </div>
             </div>
-        <?php endforeach; ?>
-    </div>
-    </main>
 
+            <!-- Produk 2 -->
+            <div class="card">
+                <div class="kategori">mouse wireless</div>
+                <h3 class="nama-produk">CIA Mouse Wireless M200</h3>
+                <div class="area-harga">
+                    <div class="harga">Rp 185.000</div>
+                </div>
+                <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong>32</strong></span>
+                        <span class="badge badge-tersedia">Tersedia</span>
+                    </div>
+                    <button class="btn-beli">Beli</button>
+                </div>
+            </div>
+
+            <!-- Produk 3 (Ada Diskon >= 1 Juta) -->
+            <div class="card">
+                <div class="kategori">monitor gaming</div>
+                <h3 class="nama-produk">CIA Monitor Gaming 144Hz</h3>
+                <div class="area-harga">
+                    <div class="harga-diskon-wrapper">
+                        <span class="harga-normal-coret">Rp 3.400.000</span>
+                        <span class="badge-diskon">Hemat 10%</span>
+                    </div>
+                    <div class="harga">Rp 3.060.000</div>
+                </div>
+                <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong>14</strong></span>
+                        <span class="badge badge-tersedia">Tersedia</span>
+                    </div>
+                    <button class="btn-beli">Beli</button>
+                </div>
+            </div>
+
+            <!-- Produk 4 -->
+            <div class="card">
+                <div class="kategori">power bank</div>
+                <h3 class="nama-produk">CIA Power Bank PB20</h3>
+                <div class="area-harga">
+                    <div class="harga">Rp 289.000</div>
+                </div>
+                <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong>26</strong></span>
+                        <span class="badge badge-tersedia">Tersedia</span>
+                    </div>
+                    <button class="btn-beli">Beli</button>
+                </div>
+            </div>
+
+            <!-- Produk 5 -->
+            <div class="card">
+                <div class="kategori">kabel usb-c</div>
+                <h3 class="nama-produk">CIA USB-C Hub U7</h3>
+                <div class="area-harga">
+                    <div class="harga">Rp 49.000</div>
+                </div>
+                <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong>9</strong></span>
+                        <span class="badge badge-tersedia">Tersedia</span>
+                    </div>
+                    <button class="btn-beli">Beli</button>
+                </div>
+            </div>
+
+            <!-- Produk 6 -->
+            <div class="card">
+                <div class="kategori">Webcam</div>
+                <h3 class="nama-produk">CIA Webcam 1080p</h3>
+                <div class="area-harga">
+                    <div class="harga">Rp 399.000</div>
+                </div>
+                <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong>21</strong></span>
+                        <span class="badge badge-tersedia">Tersedia</span>
+                    </div>
+                    <button class="btn-beli">Beli</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
