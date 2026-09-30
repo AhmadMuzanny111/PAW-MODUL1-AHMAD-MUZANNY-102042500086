@@ -6,23 +6,14 @@
     -webkit-font-smoothing: antialiased;
 }
 
-.btn-beli {
-    margin-top: 12px; 
-}
-
-.badge {
-    margin-left: 10px;
-    margin-bottom: 20px;
-}
-
 :root {
-    --primary-color: #800020;
-    --primary-hover: #5a0017;
-    --bg-color: #fff0f3;
+    --primary-color: #800020;        /* Maroon Utama */
+    --primary-hover: #5a0017;        /* Maroon Gelap */
+    --bg-color: #fff0f3;             /* Soft Pink Warm Background */
     --card-bg: #ffffff;
-    --text-color: #2b1017;
+    --text-color: #2b1017;           /* Text Dark Maroon */
     --text-muted: #7a5860;
-    --border-color: #f7cbd4;
+    --border-color: #f7cbd4;         /* Border Pink Soft */
     --green-badge: #1b7e32;
     --red-badge: #c62828;
 }
@@ -36,6 +27,7 @@ body {
     min-height: 100vh;
 }
 
+/* Navigasi Utama */
 .navbar {
     background: linear-gradient(135deg, #800020 0%, #5a0017 100%);
     padding: 28px 20px 48px 20px;
@@ -84,6 +76,7 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+/* Hero Section */
 .hero {
     background: linear-gradient(135deg, #800020 0%, #5a0017 100%);
     color: white;
@@ -109,6 +102,7 @@ body {
     font-weight: 400;
 }
 
+/* Outer Container */
 .container {
     max-width: 900px;
     margin: 30px auto 50px auto;
@@ -145,6 +139,7 @@ body {
     border: 1.5px solid var(--border-color);
 }
 
+/* Grid Layout 2 Kolom */
 .produk-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -167,6 +162,12 @@ body {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(128, 0, 32, 0.12);
     border-color: #f0a3b3;
+}
+
+.card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .kategori {
@@ -226,7 +227,7 @@ body {
     letter-spacing: -0.3px;
 }
 
-.info-stok {
+.card-bottom {
     display: flex;
     flex-direction: column;
     gap: 18px;
