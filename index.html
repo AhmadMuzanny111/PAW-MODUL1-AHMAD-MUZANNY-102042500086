@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cia Store</title>
+</head>
+<body>
+    
+    <!-- Navigasi -->
+     <nav class="navbar">
+        <a href="#" class="navbar-toko">Cia Store</a>
+        <ul class="navbar-top">
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#">Tentang kami</a></li>
+        </ul>
+     </nav>
+
+    <!-- Hero Section -->
+     <header class="hero">
+        <h1>Selamat datang di Cia Store</h1>
+        <p>Temukan perangkat dan aksesoris teknologi kualitas tinggi dengan harga terbaik!</p>
+     </header>
+
+    <!-- Konten Utama -->
+    <main class="container" id="produk">
+    <!-- Informasi jumlah produk -->
+        <div class="produk-header">
+            <h2 class="produk-tittle">Daftar Produk</h2>
+            <div class="produk-totalproduk">
+                Total produk: <strong><?= $total_produk; ?></strong> 
+            </div>
+    </div>
+
+    <!-- Looping PHP buat nampilin card produk -->
+    <div class="produk-grid">
+        <?php foreach ($produk_list as $produk): ?>
+            <?php 
+                // 1. HITUNG LOGIKA DISKON DI SINI (Sebelum HTML dirender)
+                $harga_normal = $produk['harga'];
+                $dapet_diskon = $harga_normal >= 1000000; // Syarat modul: >= Rp 1.000.000
+                $persen_diskon = 10;
+                
+                if ($dapet_diskon) {
+                    $potongan = $harga_normal * ($persen_diskon / 100);
+                    $harga_setelah_diskon = $harga_normal - $potongan;
+                }
+            ?>
+
+    <div class="card">
+        <div class="kategori">
+            <?= htmlspecialchars($produk['kategori']); ?>
+        </div>
+        <h3 class="nama-produk"><?= htmlspecialchars($produk['nama']); ?></h3>
+                
+    <!-- Area Tampilan Harga & Diskon -->
+        <div class="area-harga">
+            <?php if ($dapet_diskon): ?>
+    <!-- Baris Harga Coret & Badge Diskon -->
+        <div class="harga-diskon-wrapper">
+            <span class="harga-normal-coret">Rp <?= number_format($harga_normal, 0, ',', '.'); ?></span>
+            <span class="badge-diskon">Hemat <?= $persen_diskon; ?>%</span>
+        </div>
+    <!-- Harga Akhir Setelah Diskon -->
+        <div class="harga">
+            Rp <?= number_format($harga_setelah_diskon, 0, ',', '.'); ?>
+        </div>
+        <?php else: ?>
+    <!-- Harga Normal Jika Tidak Ada Diskon -->
+        <div class="harga">
+            Rp <?= number_format($harga_normal, 0, ',', '.'); ?>
+        </div>
+            <?php endif; ?>
+        </div>
+                
+    <!-- Informasi Stok & Tombol Beli -->
+        <div class="info-stok">
+                    <div class="stok-row">
+                        <span>Sisa Stok: <strong><?= $produk['stok']; ?></strong></span>
+
+                        <?php
+                        // Percabangan 1: Cek stok
+                        if ($produk['stok'] > 0) {
+                            echo '<span class="badge badge-tersedia">Tersedia</span>';
+                        } else {
+                            echo '<span class="badge badge-tidaktersedia">Habis</span>';
+                        }
+                        ?>
+                    </div>
+
+                    <?php 
+                    // Percabangan 2: Cek tombol beli
+                    if ($produk['stok'] > 0) {
+                        echo '<button class="btn-beli">Beli</button>';
+                    } else {
+                        echo '<button class="btn-beli btn-disabled" disabled>Stok Habis</button>';
+                    }
+                    ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+  </body>
+</html>
