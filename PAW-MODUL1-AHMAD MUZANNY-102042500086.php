@@ -29,7 +29,7 @@ $produk_list = [
         "nama" => "CIA USB-C Hub U7",
         "kategori" => "kabel usb-c",
         "harga" => 49000,
-        "stok" => 9
+        "stok" => 0
     ],
     [
         "nama" => "CIA Webcam 1080p",
